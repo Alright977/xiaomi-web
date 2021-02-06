@@ -1,10 +1,13 @@
 <template>
   <div>
-    detail
+    orderpay
   </div>
 </template>
+
 <script>
 export default {
-  name: 'detail',
+  name: 'order-pay',
 }
 </script>
+
+<style></style>
