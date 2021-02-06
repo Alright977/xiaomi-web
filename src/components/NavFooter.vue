@@ -1,7 +1,5 @@
 <template>
-  <div>
-    NavFooter
-  </div>
+  <div> </div>
 </template>
 <script>
 export default {

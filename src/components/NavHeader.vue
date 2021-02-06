@@ -23,18 +23,71 @@
         <div class="header-menu">
           <div class="item-menu">
             <span>小米手机</span>
-            <div class="childern"></div>
+            <div class="children">
+              <ul>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt="" />
+                    </div>
+                    <div class="pro-name">小米11</div>
+                    <div class="pro-price">3999元起</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b11742a0be47f9d97bb6a13ea580018d.png?thumb=1&w=160&h=110&f=webp&q=90" alt="" />
+                    </div>
+                    <div class="pro-name">小米10自尊纪念版</div>
+                    <div class="pro-price">5299元起</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt="" />
+                    </div>
+                    <div class="pro-name">小米11</div>
+                    <div class="pro-price">3999元起</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt="" />
+                    </div>
+                    <div class="pro-name">小米11</div>
+                    <div class="pro-price">3999元起</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt="" />
+                    </div>
+                    <div class="pro-name">小米11</div>
+                    <div class="pro-price">3999元起</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="item-menu">
             <span>红米手机</span>
-            <div class="childern"></div>
+            <div class="children"></div>
           </div>
           <div class="item-menu">
             <span>电视</span>
-            <div class="childern"></div>
+            <div class="children"></div>
           </div>
         </div>
-        <div class="header-search"></div>
+        <div class="header-search">
+          <div class="wrapper">
+            <input type="text" name="keyword" />
+            <a href="javascript:;"></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -46,6 +99,8 @@ export default {
 </script>
 <style scoped lang="scss">
 @import '~@/assets/scss/base.scss';
+@import '~@/assets/scss/mixin.scss';
+@import '~@/assets/scss/config.scss';
 .header {
   .nav-topbar {
     height: 39px;
@@ -53,9 +108,7 @@ export default {
     background-color: #333333;
     color: #b0b0b0;
     .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex();
       a {
         display: inline-block;
         color: #b0b0b0;
@@ -67,11 +120,7 @@ export default {
         text-align: center;
         color: #ffffff;
         .icon-cart {
-          display: inline-block;
-          width: 16px;
-          height: 12px;
-          background: url('/imgs/icon-cart-checked.png') no-repeat center;
-          background-size: contain;
+          @include bgImg(16px, 12px, '/imgs/icon-cart-checked.png');
           margin-right: 4px;
         }
       }
@@ -79,10 +128,9 @@ export default {
   }
   .nav-header {
     .container {
+      position: relative;
       height: 112px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex();
       .header-logo {
         display: inline-block;
         width: 55px;
@@ -94,30 +142,22 @@ export default {
           height: 55px;
           &::before {
             content: '';
-            display: inline-block;
-            width: 55px;
-            height: 55px;
-            background: url('/imgs/mi-home.png') no-repeat center;
-            background-size: 55px;
+            @include bgImg(55px, 55px, '/imgs/mi-logo.png', 55px);
             transition: margin-left 0.2s;
           }
           &::after {
             content: '';
-            display: inline-block;
-            width: 55px;
-            height: 55px;
-            background: url('/imgs/mi-logo.png') no-repeat center;
-            background-size: 55px;
+            @include bgImg(55px, 55px, '/imgs/mi-home.png', 55px);
           }
           &:hover::before {
-            margin-left: -55px;
+            margin-left: -58px;
             transition: margin-left 0.2s;
           }
         }
       }
       .header-menu {
         display: inline-block;
-        width: 200px;
+        width: 643px;
         padding-left: 209px;
         .item-menu {
           display: inline-block;
@@ -125,10 +165,92 @@ export default {
           font-weight: bold;
           font-size: 16px;
           line-height: 112px;
+          margin-right: 20px;
           span {
             cursor: pointer;
           }
           &:hover {
+            color: $colorA;
+            .children {
+              height: 220px;
+              opacity: 1;
+            }
+          }
+          .children {
+            position: absolute;
+            top: 112px;
+            left: 0;
+            width: 1226px;
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            border-top: 1px solid #e55555;
+            box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
+            z-index: 10;
+            transition: all 0.5s;
+            .product {
+              position: relative;
+              float: left;
+              width: 16.6%;
+              height: 220px;
+              font-size: 12px;
+              line-height: 12px;
+              a {
+                display: inline-block;
+              }
+              img {
+                height: 111px;
+                width: auto;
+                margin-top: 26px;
+              }
+              .pro-img {
+                height: 137px;
+              }
+              .pro-name {
+                font-weight: bold;
+                margin-top: 19px;
+                margin-bottom: 8px;
+                color: $colorB;
+                text-align: center;
+              }
+              .pro-price {
+                text-align: center;
+                color: $colorA;
+              }
+              &::before {
+                content: '';
+                position: absolute;
+                top: 28px;
+                right: 0;
+                border-right: 1px solid $colorF;
+                height: 100px;
+                width: 1px;
+              }
+              &:last-child::before {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+      .header-search {
+        width: 319px;
+        .wrapper {
+          height: 50px;
+          border: 1px solid #e0e0e0;
+          display: flex;
+          align-items: center;
+          input {
+            box-sizing: border-box;
+            border: none;
+            border-right: 1px solid #e0e0e0;
+            width: 264px;
+            height: 50px;
+            padding-left: 14px;
+          }
+          a {
+            @include bgImg(18px, 18px, '/imgs/icon-search.png');
+            margin-left: 17px;
           }
         }
       }
