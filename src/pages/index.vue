@@ -6,7 +6,13 @@
           <ul class="menu-wrap">
             <li class="menu-item">
               <a href="javascript:;">手机 电话卡</a>
-              <div class="children"></div>
+              <div class="children">
+                <ul v-for="(item, index) in menuList" :key="index">
+                  <li v-for="(sub, i) in item" :key="i">
+                    <a :href="sub ? '/#/product/' + sub.id : ''"><img :src="sub.img ? sub.img : '/imgs/item-box-1.png'" />{{ sub.name ? sub.name : '小米9' }}</a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">电视 盒子</a>
@@ -111,6 +117,35 @@ export default {
           img: 'imgs/slider/slide-5.jpg',
         },
       ],
+      menuList: [
+        [
+          {
+            id: '30',
+            img: '/imgs/item-box-1.png',
+            name: '小米cc9',
+          },
+          {
+            id: '31',
+            img: '/imgs/item-box-2.png',
+            name: '小米8青春版',
+          },
+          {
+            id: '32',
+            img: '/imgs/item-box-3.jpg',
+            name: 'Redmi K20 Pro',
+          },
+          {
+            id: '33',
+            img: '/imgs/item-box-4.jpg',
+            name: '移动4G专区',
+          },
+        ],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+      ],
     }
   },
   components: {
@@ -122,6 +157,7 @@ export default {
 </script>
 <style scoped lang="scss">
 @import '~@/assets/scss/mixin.scss';
+@import '~@/assets/scss/config.scss';
 .index {
   .swiper-box {
     .swiper-container {
@@ -161,6 +197,41 @@ export default {
           }
           &:hover {
             background-color: #ff6600;
+            .children {
+              display: block;
+            }
+          }
+          .children {
+            position: absolute;
+            width: 962px;
+            height: 460px;
+            display: none;
+            top: 0;
+            left: 264px;
+            border: 1px solid $colorH;
+            ul {
+              display: flex;
+              justify-content: space-between;
+              height: 76.4px;
+              background-color: $colorG;
+              li {
+                height: 75px;
+                line-height: 75px;
+                flex: 1;
+                padding-left: 23px;
+                img {
+                  width: 42px;
+                  height: 35px;
+                  vertical-align: middle;
+                  margin-right: 15px;
+                }
+              }
+
+              a {
+                color: $colorB;
+                font-size: 14px;
+              }
+            }
           }
         }
       }
