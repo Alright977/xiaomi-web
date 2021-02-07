@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.0",
+    "swiper": "5.3.6",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
     "vue-cookie": "^1.1.4",
