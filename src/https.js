@@ -1,10 +1,6 @@
 import axios from 'axios'
 
-const instance = axios.create({
-  baseURl: '/api',
-  // 超时时间
-  timeout: 8000,
-})
+const instance = axios.create({})
 
 //  接口响应拦截
 instance.interceptors.response.use((response) => {
