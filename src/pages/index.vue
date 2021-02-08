@@ -1,6 +1,7 @@
 <template>
   <div class="index">
     <div class="container">
+      <!-- 轮播 -->
       <div class="swiper-box">
         <div class="nav-menu">
           <ul class="menu-wrap">
@@ -55,9 +56,44 @@
           <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
       </div>
-      <div class="ads-box"></div>
-      <div class="banner"></div>
-      <div class="product-box"></div>
+      <!-- 广告位 -->
+      <div class="ads-box">
+        <a :href="'/#/product/' + item.id" v-for="item in adsList" :key="item.id">
+          <img :src="item.img" />
+        </a>
+      </div>
+      <!-- banner图 -->
+      <div class="banner">
+        <a href="/#/product/30">
+          <img src="/imgs/banner-1.png" />
+        </a>
+      </div>
+    </div>
+    <!-- 手机商品 -->
+    <div class="product-box">
+      <div class="container">
+        <h2>手机</h2>
+        <div class="wrapper">
+          <div class="banner-left">
+            <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg" alt=""/></a>
+          </div>
+          <div class="list-box">
+            <div class="list" v-for="(arr, i) in phoneList" :key="i">
+              <div class="item" v-for="(item, j) in arr" :key="j">
+                <span>新品</span>
+                <div class="item-img">
+                  <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5a260090e0e08770b0bd865845a4b4ab.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="" />
+                </div>
+                <div class="item-info">
+                  <h3>小米9</h3>
+                  <p>晓龙855</p>
+                  <p class="price">2999元</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <service-bar></service-bar>
   </div>
@@ -146,6 +182,28 @@ export default {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
       ],
+      adsList: [
+        {
+          id: '33',
+          img: '/imgs/ads/ads-1.png',
+        },
+        {
+          id: '48',
+          img: '/imgs/ads/ads-2.jpg',
+        },
+        {
+          id: '45',
+          img: '/imgs/ads/ads-3.png',
+        },
+        {
+          id: '47',
+          img: '/imgs/ads/ads-4.jpg',
+        },
+      ],
+      phoneList: [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+      ],
     }
   },
   components: {
@@ -172,7 +230,7 @@ export default {
     .nav-menu {
       position: absolute;
       width: 264px;
-      height: 460px;
+      height: 451px;
       padding: 26px 0;
       background-color: #55585a7a;
       box-sizing: border-box;
@@ -204,7 +262,7 @@ export default {
           .children {
             position: absolute;
             width: 962px;
-            height: 460px;
+            height: 451px;
             display: none;
             top: 0;
             left: 264px;
@@ -212,7 +270,7 @@ export default {
             ul {
               display: flex;
               justify-content: space-between;
-              height: 76.4px;
+              height: 75px;
               background-color: $colorG;
               li {
                 height: 75px;
@@ -230,6 +288,85 @@ export default {
               a {
                 color: $colorB;
                 font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .ads-box {
+    @include flex();
+    margin-top: 14px;
+    margin-bottom: 31px;
+    a {
+      width: 296px;
+      height: 167px;
+    }
+  }
+  .banner {
+    margin-bottom: 50px;
+  }
+  .product-box {
+    background-color: $colorJ;
+    padding: 30px 0 50px;
+    h2 {
+      font-size: $fontF;
+      height: 21px;
+      line-height: 21px;
+      color: $colorB;
+      margin-bottom: 20px;
+    }
+    .wrapper {
+      display: flex;
+      .banner-left {
+        margin-right: 16px;
+        img {
+          width: 224px;
+          height: 619px;
+        }
+      }
+      .list-box {
+        .list {
+          @include flex();
+          width: 986px;
+          margin-bottom: 14px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .item {
+            width: 236px;
+            height: 302px;
+            background-color: $colorG;
+            text-align: center;
+          }
+          .item-img {
+            img {
+              height: 195px;
+            }
+          }
+          .item-info {
+            h3 {
+              font-size: $fontJ;
+              color: $colorB;
+              line-height: 14px;
+              font-weight: bold;
+            }
+            p {
+              color: $colorD;
+              line-height: 13px;
+              margin: 6px auto 13px;
+            }
+            .price {
+              color: #f20a0a;
+              font-size: $fontJ;
+              font-weight: bold;
+              cursor: pointer;
+              &::after {
+                content: '';
+                margin-left: 5px;
+                vertical-align: middle;
+                @include bgImg(22px, 22px, '/imgs/icon-cart-hover.png');
               }
             }
           }
