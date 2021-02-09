@@ -59,13 +59,13 @@
       <!-- 广告位 -->
       <div class="ads-box">
         <a :href="'/#/product/' + item.id" v-for="item in adsList" :key="item.id">
-          <img :src="item.img" />
+          <img v-lazy="item.img" />
         </a>
       </div>
       <!-- banner图 -->
       <div class="banner">
         <a href="/#/product/30">
-          <img src="/imgs/banner-1.png" />
+          <img v-lazy="'/imgs/banner-1.png'" />
         </a>
       </div>
     </div>
@@ -75,19 +75,19 @@
         <h2>手机</h2>
         <div class="wrapper">
           <div class="banner-left">
-            <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg" alt=""/></a>
+            <a href="/#/product/35"><img v-lazy="'/imgs/mix-alpha.jpg'" alt=""/></a>
           </div>
           <div class="list-box">
             <div class="list" v-for="(arr, i) in phoneList" :key="i">
               <div class="item" v-for="(item, j) in arr" :key="j">
                 <span :class="{ 'new-pro': j % 2 == 0 }">新品</span>
                 <div class="item-img">
-                  <img :src="item.mainImage" alt="item.name" />
+                  <img v-lazy="item.mainImage" alt="item.name" />
                 </div>
                 <div class="item-info">
                   <h3>{{ item.name }}</h3>
                   <p>{{ item.subtitle }}</p>
-                  <p class="price">{{ item.price | currency }}</p>
+                  <p class="price" @click="addCart()">{{ item.price | currency }}</p>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@
       </div>
     </div>
     <service-bar></service-bar>
-    <modal title="提示" sureText="查看购物车" btnType="1" modalType="middle" :showModal="true">
+    <modal title="提示" sureText="查看购物车" btnType="1" modalType="middle" :showModal="showModal" @submit="goToCart" @cancel="showModal = false">
       <template v-slot:body>
         <p>商品添加成功</p>
       </template>
@@ -207,6 +207,7 @@ export default {
         },
       ],
       phoneList: [],
+      showModal: false,
     }
   },
   mounted() {
@@ -225,6 +226,22 @@ export default {
           res.list = res.list.slice(6, 14)
           this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
         })
+    },
+    addCart() {
+      this.showModal = true
+      //   this.$axios
+      //     .post('/carts', {
+      //       productId: id,
+      //       selected: true,
+      //     })
+      //     .then(() => {})
+      //     .catch(() => {
+      //       this.showModal = true
+      //     })
+      // },
+    },
+    goToCart() {
+      this.$router.push('/cart')
     },
   },
   //  过滤

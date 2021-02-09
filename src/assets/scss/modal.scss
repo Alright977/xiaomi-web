@@ -1,10 +1,20 @@
 .modal {
   @include position(fixed);
   z-index: 10;
+  transition: all 0.5s;
   .mask {
     @include position(fixed);
-    // opacity: 0.5;
+    opacity: 0.5;
     background-color: $colorI;
+  }
+  &.slide-enter-active {
+    top: 0;
+  }
+  &.slide-leave-active {
+    top: -100%;
+  }
+  &.slide-enter {
+    top: -100%;
   }
   .modal-dialog {
     @include position(absolute, 40%, 50%, 660px, auto);
