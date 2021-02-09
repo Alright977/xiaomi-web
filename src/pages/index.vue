@@ -80,14 +80,14 @@
           <div class="list-box">
             <div class="list" v-for="(arr, i) in phoneList" :key="i">
               <div class="item" v-for="(item, j) in arr" :key="j">
-                <span>新品</span>
+                <span :class="{ 'new-pro': j % 2 == 0 }">新品</span>
                 <div class="item-img">
-                  <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5a260090e0e08770b0bd865845a4b4ab.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="" />
+                  <img :src="item.mainImage" alt="item.name" />
                 </div>
                 <div class="item-info">
-                  <h3>小米9</h3>
-                  <p>晓龙855</p>
-                  <p class="price">2999元</p>
+                  <h3>{{ item.name }}</h3>
+                  <p>{{ item.subtitle }}</p>
+                  <p class="price">{{ item.price | currency }}</p>
                 </div>
               </div>
             </div>
@@ -200,11 +200,33 @@ export default {
           img: '/imgs/ads/ads-4.jpg',
         },
       ],
-      phoneList: [
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-      ],
+      phoneList: [],
     }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    init() {
+      this.$axios
+        .get('/products', {
+          params: {
+            categoryId: 100012,
+            pageSize: 14,
+          },
+        })
+        .then((res) => {
+          res.list = res.list.slice(6, 14)
+          this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
+        })
+    },
+  },
+  //  过滤
+  filters: {
+    currency(val) {
+      if (!val) return '0.00'
+      return val.toFixed(2) + '元'
+    },
   },
   components: {
     ServiceBar,
@@ -339,9 +361,24 @@ export default {
             height: 302px;
             background-color: $colorG;
             text-align: center;
+            span {
+              display: inline-block;
+              width: 67px;
+              height: 24px;
+              line-height: 24px;
+              font-size: 14px;
+              color: $colorG;
+              &.new-pro {
+                background-color: #7ecf68;
+              }
+              &.kill-pro {
+                background-color: #e82626;
+              }
+            }
           }
           .item-img {
             img {
+              width: 100%;
               height: 195px;
             }
           }
