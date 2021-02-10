@@ -47,7 +47,7 @@
         </div>
         <swiper :options="swiperOptions">
           <swiper-slide v-for="item in slideList" :key="item.id">
-            <a :href="'/#/product' + item.id"><img :src="item.img"/></a>
+            <a :href="'/#/product/' + item.id"><img :src="item.img"/></a>
           </swiper-slide>
           <!-- 分页器 -->
           <div class="swiper-pagination" slot="pagination"></div>
